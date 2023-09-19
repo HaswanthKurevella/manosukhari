@@ -1,12 +1,15 @@
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import './Articles.css';
 
 const API_KEY = import.meta.env.VITE_ARTICLES_API_KEY;
 
 export async function loader() {
-	const date = '2023-09-18';
+	let currentDate = new Date();
+	let yesterday = new Date(currentDate);
+	yesterday.setDate(currentDate.getDate() - 1);
 	const data = await fetch(
-		`https://newsapi.org/v2/everything?q=mental%20health&from=${date}&apiKey=${API_KEY}`
+		`https://newsapi.org/v2/everything?q=mental%20health&from=${yesterday}&apiKey=${API_KEY}`
 	);
 	return data;
 }
@@ -14,24 +17,30 @@ export async function loader() {
 const Articles = () => {
 	const { articles } = useLoaderData();
 	let i = 0;
-	console.log(articles);
+	console.log(articles[0]);
 	return (
 		<>
 			{articles.length ? (
 				<div className='articles'>
 					{articles.map((article) => (
 						<div key={i++} className='article'>
-							<div className='article-title'>{article.title}</div>
-							<div className='description-container'>
-								<p className='article-description'>{article.description}</p>
-								{article.urlToImage && (
-									<img className='article-img' src={article.urlToImage} />
-								)}
-							</div>
-							<div className='meta-data'>
-								By <span className='article-author'>{article.author}</span> on{' '}
-								<span className='article-date'>{article.publishedAt}</span>
-							</div>
+							<Link to={article.url}>
+								<div className='article-title'>{article.title}</div>
+								<div className='description-container'>
+									<p className='article-description'>{article.description}</p>
+									{article.urlToImage && (
+										<img className='article-img' src={article.urlToImage} />
+									)}
+								</div>
+								<div className='meta-data'>
+									By <span className='article-author'>{article.author}</span>{' '}
+									<span className='article-date'>
+										{formatDistanceToNow(new Date(article.publishedAt), {
+											addSuffix: true,
+										})}
+									</span>
+								</div>
+							</Link>
 						</div>
 					))}
 				</div>
