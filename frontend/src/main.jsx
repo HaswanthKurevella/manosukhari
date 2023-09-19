@@ -10,7 +10,7 @@ import Login from './routes/Login.jsx';
 import Feedback from './routes/FeedBack.jsx';
 import FAQ from './routes/FAQ.jsx';
 import About from './routes/About.jsx';
-import Articles from './routes/Articles.jsx';
+import Articles, { loader as articlesLoader } from './routes/Articles.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
 			{
 				path: '/',
 				element: <Articles />,
+				loader: articlesLoader,
 			},
 			{
 				path: 'login',

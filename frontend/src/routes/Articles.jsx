@@ -1,5 +1,12 @@
 import './Articles.css';
 
+const API_KEY = import.meta.env.ARTICLES_API_KEY;
+
+export async function loader() {
+	const data = await fetch(`https://newsapi.org/v2/everything?q=mentalhealth&apiKey=${API_KEY}`);
+	console.log(data);
+}
+
 const Articles = () => {
 	return (
 		<>
