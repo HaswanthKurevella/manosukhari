@@ -1,0 +1,33 @@
+.articles {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	gap: 1.1rem;
+	padding: 1.1rem;
+}
+
+.article {
+	width: 30vw;
+	height: auto;
+	border: 1px dotted black;
+	border-radius: 5px;
+	display: flex;
+	gap: 1.1rem;
+	padding: 1.1rem;
+	justify-content: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.title {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.description {
+	font-size: 1.3rem;
+}
+
+.author {
+	text-decoration: underline;
+}
