@@ -17,7 +17,6 @@ export async function loader() {
 const Articles = () => {
 	const { articles } = useLoaderData();
 	let i = 0;
-	console.log(articles[0]);
 	return (
 		<>
 			{articles.length ? (
