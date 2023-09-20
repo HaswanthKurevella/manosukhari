@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import './Articles.css';
+import './styles/Articles.css';
 
 const API_KEY = import.meta.env.VITE_ARTICLES_API_KEY;
 
