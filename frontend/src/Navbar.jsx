@@ -18,6 +18,9 @@ function NavBar() {
 						<Link to='faq'>FAQ</Link>
 					</li>
 					<li>
+						<Link to='assesment'>Assesment</Link>
+					</li>
+					<li>
 						<Link to='feedback'>Feedback</Link>
 					</li>
 					<li>
