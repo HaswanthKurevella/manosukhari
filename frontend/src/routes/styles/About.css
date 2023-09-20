@@ -1,0 +1,6 @@
+.about-container {
+	display: flex;
+	padding: 2rem;
+	font-size: 1.5rem;
+	height: 100vh;
+}

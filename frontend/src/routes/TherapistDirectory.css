@@ -1,0 +1,40 @@
+.doctor-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+.card{
+    /* css for the card */
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #ccc;
+    text-align: center;
+    display:flex;
+}
+.card:hover{
+    /* css for the card when hovered */
+    box-shadow: 4px 4px 4px #ccc;
+}
+.desc{
+    /* css for the text */
+    text-align: left;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.book{
+    /* css for the button */
+    margin: 0 auto;
+    padding: 0 auto;
+    margin: 5px;
+    color: green;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+}
