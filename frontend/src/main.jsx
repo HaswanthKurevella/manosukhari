@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './error-page.jsx';
 
 // Routes
-import Contact from './routes/Contact.jsx';
 import Login from './routes/Login.jsx';
 import Feedback from './routes/FeedBack.jsx';
 import FAQ from './routes/FAQ.jsx';
@@ -38,10 +37,6 @@ const router = createBrowserRouter([
 			{
 				path: 'about',
 				element: <About />,
-			},
-			{
-				path: 'contact',
-				element: <Contact />,
 			},
 		],
 	},
