@@ -6,10 +6,12 @@ import ErrorPage from './error-page.jsx';
 
 // Routes
 import Login from './routes/Login.jsx';
+import Assesment from './routes/Assesment.jsx';
 import Feedback from './routes/FeedBack.jsx';
 import FAQ from './routes/FAQ.jsx';
 import About from './routes/About.jsx';
 import Articles, { loader as articlesLoader } from './routes/Articles.jsx';
+import TherapistDirectory from './routes/TherapistDirectory.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
 				path: '/',
 				element: <Articles />,
 				loader: articlesLoader,
+			},
+			{	
+			    path: 'assesment',
+				element: <Assesment />
 			},
 			{
 				path: 'login',
@@ -37,6 +43,10 @@ const router = createBrowserRouter([
 			{
 				path: 'about',
 				element: <About />,
+			},
+			{
+				path:'therapists',
+				element:<TherapistDirectory/>,
 			},
 		],
 	},
