@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './styles/Login.css'; // Import your CSS file
 
-function Login() {
-  const [username, setUsername] = useState('');
+const Login= () => {
+  const [email, setEmail] = useState(''); // Change 'setemail' to 'setEmail'
   const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
     // Here, you can implement your login logic (e.g., sending a request to a server).
-    console.log('Username:', username);
+    console.log('Email:', email); // Change 'email' to 'Email'
     console.log('Password:', password);
   };
 
@@ -17,13 +17,13 @@ function Login() {
       <h1>Login</h1>
       <form onSubmit={handleLogin}>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
-            id="username"
-            placeholder="Enter your username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="email" // Change 'username' to 'email'
+            placeholder="Enter your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} // Change 'setUsername' to 'setEmail'
           />
         </div>
         <div className="form-group">
@@ -43,4 +43,3 @@ function Login() {
 }
 
 export default Login;
-

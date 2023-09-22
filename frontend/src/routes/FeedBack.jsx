@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './styles/Feedback.css';
-function Feedback() {
+import axios from 'axios'; // Import axios
+
+const Feedback = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -12,16 +14,30 @@ function Feedback() {
     setDescription(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Here you can send the feedback data to your backend or perform any other action with it
-    console.log('Title:', title);
-    console.log('Description:', description);
+    try {
+      const response = await axios.post('http://localhost:5000/api/feedback', {
+        title, // Ensure that 'title' is included in the request body
+        description,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+       body: JSON.stringify({ title, description }),
+      });
 
-    // Clear the form fields after submission
-    setTitle('');
-    setDescription('');
+      if (response.status === 201) {
+        console.log('Feedback saved successfully');
+        setTitle('');
+        setDescription('');
+      } else {
+        console.error('Error saving feedback');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -53,6 +69,6 @@ function Feedback() {
       </form>
     </div>
   );
-}
+};
 
 export default Feedback;
