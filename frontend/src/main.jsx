@@ -55,18 +55,17 @@ const router = createBrowserRouter([
 				element:<TherapistDirectory/>,
 			},
 			{
-
 				path:'moodJournal',
 				element:<MoodJournal/>,
 			},
 			{
 				path: 'login',
 				element: <Login />,
-			}
-
+			},
 		],
 	},
 ]);
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
