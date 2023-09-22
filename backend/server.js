@@ -59,31 +59,31 @@ app.get('/api/therapists', (req, res) => {
 });
 
 
-const MoodSchema = new mongoose.Schema({
-  mood: String,
-}, {
-  collection: 'mood',
-  timestamps: true
-});
+// const MoodSchema = new mongoose.Schema({
+//   mood: String,
+// }, {
+//   collection: 'mood',
+//   timestamps: true
+// });
 
-const MoodModel = mongoose.model('Mood', MoodSchema);
+// const MoodModel = mongoose.model('Mood', MoodSchema);
 
-app.post('/api/save-mood', async (req, res) => {
-  try {
-    const { mood } = req.body;
+// app.post('/api/save-mood', async (req, res) => {
+//   try {
+//     const { mood } = req.body;
 
-    const newMood = new MoodModel({
-      mood,
-    });
+//     const newMood = new MoodModel({
+//       mood,
+//     });
 
-    await newMood.save();
+//     await newMood.save();
 
-    res.status(201).json({ message: 'Mood saved successfully' });
-  } catch (error) {
-    console.error('Error saving mood:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
+//     res.status(201).json({ message: 'Mood saved successfully' });
+//   } catch (error) {
+//     console.error('Error saving mood:', error);
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// });
 
 
 // retriving the single therapist data

@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 //import './App.css';
 
-class Assesment extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-		currentQuestion: 0,
-		depressionScore: 0,
-		stressScore: 0,
-		anxiousScore: 0,
-		chartData: null,
+      currentQuestion: 0,
+      score: 0,
       questions: [
         {
           question: 'Did you often find yourself getting upset about little things?',
@@ -119,97 +116,49 @@ class Assesment extends Component {
         },
       ],
 	  answeredQuestions: new Array(21).fill(false), 
-	  
     };
-	this.depressionQuestions = [2, 4, 9, 12, 15, 16, 20];
-    this.stressQuestions = [0, 5, 7, 10, 11, 13, 17];
-    this.anxiousQuestions = [1, 3, 6, 8, 14, 19];
   }
 
-  handleAnswerClick = async (selectedOptionIndex) => {
-    const { currentQuestion, questions, answeredQuestions } = this.state;
   
+  handleAnswerClick = (selectedOptionIndex) => {
+    const { currentQuestion, questions, score, answeredQuestions } = this.state;
+
+    // Check if the question has already been answered or the quiz is completed
     if (answeredQuestions[currentQuestion] || this.state.quizCompleted) {
       return;
     }
-  
+
     const selectedScore = questions[currentQuestion].scores[selectedOptionIndex];
-  
-    if (this.depressionQuestions.includes(currentQuestion)) {
-      this.setState((prevState) => ({
-        depressionScore: prevState.depressionScore + selectedScore,
-      }));
-    } else if (this.stressQuestions.includes(currentQuestion)) {
-      this.setState((prevState) => ({
-        stressScore: prevState.stressScore + selectedScore,
-      }));
-    } else if (this.anxiousQuestions.includes(currentQuestion)) {
-      this.setState((prevState) => ({
-        anxiousScore: prevState.anxiousScore + selectedScore,
-      }));
-    }
-  
+
     this.setState((prevState) => ({
+      score: prevState.score + selectedScore,
       answeredQuestions: prevState.answeredQuestions.map((value, index) =>
         index === currentQuestion ? true : value
       ),
     }));
-  
+
     if (currentQuestion < questions.length - 1) {
+      // Increment currentQuestion only if it's not the last question
       this.setState({
         currentQuestion: currentQuestion + 1,
       });
     } else {
+      // If it's the last question, mark the quiz as completed
       this.setState({
         quizCompleted: true,
       });
-  
-      // Call sendAssessmentData here
-      await this.sendAssessmentData();
     }
   };
-  
-  sendAssessmentData = async () => {
-    const { depressionScore, stressScore, anxiousScore } = this.state;
-    const assessmentData = {
-      depressionScore,
-      stressScore,
-      anxiousScore,
-    };
-  
-    try {
-      // You might need to import axios at the top of your file
-      // import axios from 'axios';
-      await axios.post('http://localhost:8000/api/save-assessment', assessmentData);
-      this.setState({ quizCompleted: true });
-    } catch (error) {
-      console.error('Error saving assessment data:', error);
-      // Handle error, e.g., show an error message to the user
-    }
-  };
-  
-  
-
-
-
 
   render() {
-    const { currentQuestion, depressionScore, stressScore, anxiousScore, questions, quizCompleted, chartData } = this.state;
+    const { currentQuestion, score, questions, quizCompleted } = this.state;
 
     return (
       <div className="quiz-app">
         {quizCompleted ? (
           <div>
             <h2>Assessment completed!</h2>
-            <p>Depression Score: {depressionScore}</p>
-            <p>Stress Score: {stressScore}</p>
-            <p>Anxious Score: {anxiousScore}</p>
-            {/* {chartData && (
-              <div>
-                <h3>Score Summary</h3>
-                <Bar data={chartData} />
-              </div>
-            )} */}
+            <p>Your final score is: {score}</p>
           </div>
         ) : (
           <div>
@@ -217,14 +166,15 @@ class Assesment extends Component {
             <p>{questions[currentQuestion].question}</p>
             <ul>
               {questions[currentQuestion].options.map((option, index) => (
-                <li key={index} onClick={() => this.handleAnswerClick(index)}>
+                <li
+                  key={index}
+                  onClick={() => this.handleAnswerClick(index)}
+                >
                   {option}
                 </li>
               ))}
             </ul>
-            <p>Depression Score: {depressionScore}</p>
-            <p>Stress Score: {stressScore}</p>
-            <p>Anxious Score: {anxiousScore}</p>
+            <p>Score: {score}</p>
             {currentQuestion === questions.length - 1 && (
               <button onClick={() => this.setState({ quizCompleted: true })}>
                 Submit
@@ -237,4 +187,4 @@ class Assesment extends Component {
   }
 }
 
-export default Assesment;
+export default App;
