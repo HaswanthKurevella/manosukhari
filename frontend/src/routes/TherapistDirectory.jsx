@@ -1,4 +1,4 @@
-import icon from "H:/manosukari/frontend/src/routes/icon.png";
+import icon from "H:/manosukhari/frontend/src/routes/icon.png";
 import "./TherapistDirectory.css";
 const TherapistDirectory = () => {
   return (
