@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './styles/Feedback.css';
 import axios from 'axios'; // Import axios
+// import GaugeChart from "react-gauge-chart";
 
 const Feedback = () => {
   const [title, setTitle] = useState('');
@@ -18,7 +19,7 @@ const Feedback = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/feedback', {
+      const response = await axios.post('http://localhost:8000/api/feedback', {
         title, // Ensure that 'title' is included in the request body
         description,
         method: 'POST',
