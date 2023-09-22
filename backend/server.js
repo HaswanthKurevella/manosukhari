@@ -59,6 +59,33 @@ app.get('/api/therapists', (req, res) => {
 });
 
 
+// const MoodSchema = new mongoose.Schema({
+//   mood: String,
+// }, {
+//   collection: 'mood',
+//   timestamps: true
+// });
+
+// const MoodModel = mongoose.model('Mood', MoodSchema);
+
+// app.post('/api/save-mood', async (req, res) => {
+//   try {
+//     const { mood } = req.body;
+
+//     const newMood = new MoodModel({
+//       mood,
+//     });
+
+//     await newMood.save();
+
+//     res.status(201).json({ message: 'Mood saved successfully' });
+//   } catch (error) {
+//     console.error('Error saving mood:', error);
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// });
+
+
 // retriving the single therapist data
 
 app.get('/api/therapists/:id', (req, res) => {
