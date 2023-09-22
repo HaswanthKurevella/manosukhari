@@ -29,8 +29,14 @@ function NavBar() {
 					<li>
 						<Link to='feedback'>Feedback</Link>
 					</li>
+		
+						<Link to='moodJournal'>Mood Journal</Link>
+					</li>
 					<li>
+						<Link to='login'>Login</Link>
+    </li><li>
 						<Link to='userRegister'>Register/Login</Link>
+
 					</li>
 				</ul>
 			</nav>

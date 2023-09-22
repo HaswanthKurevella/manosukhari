@@ -1,0 +1,40 @@
+/* styles.css or your custom CSS file */
+
+/* Center content horizontally */
+body {
+    text-align: center;
+  }
+  
+  /* Style for the image grid */
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns in each row */
+    gap: 20px; /* Gap between images */
+    justify-content: center; /* Center the grid horizontally */
+  }
+  
+  /* Style for each image container */
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Style for image buttons */
+  .image-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  /* Remove the default focus outline */
+  .image-button:focus {
+    outline: none;
+  }
+  
+  /* Style for images */
+  img {
+    display: block;
+    max-width: 100%; /* Ensure images don't exceed container width */
+    height: auto;
+  }

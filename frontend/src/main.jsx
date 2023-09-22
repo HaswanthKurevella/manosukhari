@@ -13,6 +13,7 @@ import FAQ from './routes/FAQ.jsx';
 import About from './routes/About.jsx';
 import Articles, { loader as articlesLoader } from './routes/Articles.jsx';
 import TherapistDirectory from './routes/TherapistDirectory.jsx';
+import MoodJournal from './routes/MoodJournal.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -54,9 +55,15 @@ const router = createBrowserRouter([
 				element:<TherapistDirectory/>,
 			},
 			{
+
+				path:'moodJournal',
+				element:<MoodJournal/>,
+			},
+
 				path: 'login',
 				element: <Login />,
 			}
+
 		],
 	},
 ]);
