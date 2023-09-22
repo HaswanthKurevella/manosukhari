@@ -5,7 +5,7 @@ import './styles/Navbar.css';
 function NavBar() {
 	return (
 		<div className='navbar'>
-			<div className='logo-text'>Manosukari</div>
+			<div className='logo-text'>Manosukhari</div>
 			<nav>
 				<ul>
 					<li>
