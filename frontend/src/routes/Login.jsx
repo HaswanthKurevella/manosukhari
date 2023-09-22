@@ -1,45 +1,86 @@
-import React, { useState } from 'react';
-import './styles/Login.css'; // Import your CSS file
+import React, { useState } from "react";
+// import { Link, Navigate } from "react-router-dom";// Import useHistory
+import axios from "axios";
 
-const Login= () => {
-  const [email, setEmail] = useState(''); // Change 'setemail' to 'setEmail'
-  const [password, setPassword] = useState('');
+const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleLogin = (e) => {
+  const [loginError, setLoginError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Initialize the history object
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here, you can implement your login logic (e.g., sending a request to a server).
-    console.log('Email:', email); // Change 'email' to 'Email'
-    console.log('Password:', password);
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/userLogin",
+        formData
+      );
+
+      if (response.status === 200) {
+        // Handle successful login
+        console.log("Login successful");
+        // Navigate("/main");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setLoginError("Invalid email or password");
+      } else {
+        setLoginError("An error occurred during login");
+      }
+      console.error("Error logging in:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
+    <div>
+      <div style={{ textAlign: "center" }}>
+        <h2>Login</h2>
+      </div>
+      <form onSubmit={handleSubmit} className="login-form">
+        <div>
+          <label htmlFor="email">Email:</label>
           <input
-            type="text"
-            id="email" // Change 'username' to 'email'
-            placeholder="Enter your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)} // Change 'setUsername' to 'setEmail'
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
+        <div>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Login"}
+        </button>
+        {loginError && <p>{loginError}</p>}
       </form>
     </div>
   );
-}
+};
 
 export default Login;
