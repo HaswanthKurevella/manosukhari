@@ -5,7 +5,7 @@ const TherapistForm = () => {
   const [therapists, setTherapists] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/therapists') // Corrected API endpoint
+    axios.get('http://localhost:8000/api/therapists') // Corrected API endpoint
       .then((response) => {
         setTherapists(response.data.data);
       })
