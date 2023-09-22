@@ -29,15 +29,16 @@ function NavBar() {
 					<li>
 						<Link to='feedback'>Feedback</Link>
 					</li>
-		
+					<li>
 						<Link to='moodJournal'>Mood Journal</Link>
 					</li>
 					<li>
 						<Link to='login'>Login</Link>
-    </li><li>
-						<Link to='userRegister'>Register/Login</Link>
-
+   					</li>
+					<li>
+						<Link to='userRegister'>Register</Link>
 					</li>
+					
 				</ul>
 			</nav>
 		</div>
