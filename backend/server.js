@@ -186,14 +186,14 @@ const assessmentSchema = new mongoose.Schema({
   depressionScore: Number,
   stressScore: Number,
   anxiousScore: Number,
-  // Add other fields here if needed
 },{
   collection: 'assessment',
   timestamps: true
 });
 
-
 const Assessment = mongoose.model('Assessment', assessmentSchema);
+
+app.use(bodyParser.json());
 
 app.post('/api/save-assessment', async (req, res) => {
   try {
@@ -203,7 +203,7 @@ app.post('/api/save-assessment', async (req, res) => {
     res.json({ message: 'Assessment data saved successfully' });
   } catch (error) {
     console.error('Error saving assessment data:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 

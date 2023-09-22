@@ -126,16 +126,15 @@ class Assesment extends Component {
     this.anxiousQuestions = [1, 3, 6, 8, 14, 19];
   }
 
-  
-  handleAnswerClick = (selectedOptionIndex) => {
+  handleAnswerClick = async (selectedOptionIndex) => {
     const { currentQuestion, questions, answeredQuestions } = this.state;
-
+  
     if (answeredQuestions[currentQuestion] || this.state.quizCompleted) {
       return;
     }
-
+  
     const selectedScore = questions[currentQuestion].scores[selectedOptionIndex];
-
+  
     if (this.depressionQuestions.includes(currentQuestion)) {
       this.setState((prevState) => ({
         depressionScore: prevState.depressionScore + selectedScore,
@@ -149,13 +148,13 @@ class Assesment extends Component {
         anxiousScore: prevState.anxiousScore + selectedScore,
       }));
     }
-
+  
     this.setState((prevState) => ({
       answeredQuestions: prevState.answeredQuestions.map((value, index) =>
         index === currentQuestion ? true : value
       ),
     }));
-
+  
     if (currentQuestion < questions.length - 1) {
       this.setState({
         currentQuestion: currentQuestion + 1,
@@ -163,21 +162,36 @@ class Assesment extends Component {
     } else {
       this.setState({
         quizCompleted: true,
-        chartData: {
-          labels: ['Depression', 'Stress', 'Anxious'],
-          datasets: [
-            {
-              label: 'Score',
-              backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 205, 86, 0.6)'],
-              borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 205, 86, 1)'],
-              borderWidth: 1,
-              data: [this.state.depressionScore, this.state.stressScore, this.state.anxiousScore],
-            },
-          ],
-        },
       });
+  
+      // Call sendAssessmentData here
+      await this.sendAssessmentData();
     }
   };
+  
+  sendAssessmentData = async () => {
+    const { depressionScore, stressScore, anxiousScore } = this.state;
+    const assessmentData = {
+      depressionScore,
+      stressScore,
+      anxiousScore,
+    };
+  
+    try {
+      // You might need to import axios at the top of your file
+      // import axios from 'axios';
+      await axios.post('http://localhost:8000/api/save-assessment', assessmentData);
+      this.setState({ quizCompleted: true });
+    } catch (error) {
+      console.error('Error saving assessment data:', error);
+      // Handle error, e.g., show an error message to the user
+    }
+  };
+  
+  
+
+
+
 
   render() {
     const { currentQuestion, depressionScore, stressScore, anxiousScore, questions, quizCompleted, chartData } = this.state;

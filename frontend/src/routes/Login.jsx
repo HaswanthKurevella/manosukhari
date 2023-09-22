@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";// Import useHistory
+// import { Link, Navigate } from "react-router-dom";// Import useHistory
 import axios from "axios";
 
 const Login = () => {
@@ -32,8 +32,7 @@ const Login = () => {
       if (response.status === 200) {
         // Handle successful login
         console.log("Login successful");
-
-        <Link to="/main.jsx" />;
+        // Navigate("/main");
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
