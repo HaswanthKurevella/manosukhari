@@ -60,14 +60,6 @@ app.get('/api/therapists/:id', (req, res) => {
             });
         });
 });
-
-
-
-
-
-
-
-
 app.listen(5000, () => {
   console.log('Express server is running on localhost:5000');
 });

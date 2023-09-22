@@ -1,9 +1,21 @@
-import icon from "F:/sih/manosukhari/frontend/src/routes/icon.png";
+import icon from "./icon.png";
 import "./TherapistDirectory.css";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+function TherapistDirectory() {
+  const [therapists, setTherapists] = useState([]);
 
+  useEffect(() => {
+    // Make an API request to get therapist data
+    axios.get('/api/therapists')
+      .then((response) => {
+        setTherapists(response.data.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching therapists:', error);
+      });
+  }, []);
 
   return (
     <div className="doctor-list">
@@ -19,8 +31,10 @@ import axios from 'axios';
             <div className="desc">
               <h1 style={{ whiteSpace: "nowrap" }}>{therapist.username}</h1>
               <p>Email: {therapist.email}</p>
-              <p>Mobile: {therapist.mobile}</p>
+              <p>Mobile: {therapist.mobileNumber}</p> {/* Use mobileNumber instead of mobile */}
               <p>Qualification: {therapist.qualification}</p>
+              {/* You might not want to display the password field */}
+              {/* <p>Password: {therapist.password}</p> */}
               <button className="book">Book Appointment</button>
             </div>
           </div>
@@ -28,5 +42,6 @@ import axios from 'axios';
       </div>
     </div>
   );
+}
 
 export default TherapistDirectory;
