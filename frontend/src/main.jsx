@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './error-page.jsx';
 
 // Routes
+import Userregister from './routes/userRegister.jsx';
 import Login from './routes/Login.jsx';
 import Assesment from './routes/Assesment.jsx';
 import Feedback from './routes/FeedBack.jsx';
@@ -29,8 +30,8 @@ const router = createBrowserRouter([
 				element: <Assesment />
 			},
 			{
-				path: 'login',
-				element: <Login />,
+				path: 'userRegister',
+				element: <Userregister />,
 			},
 			{
 				path: 'feedback',
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
 				path:'therapists',
 				element:<TherapistDirectory/>,
 			},
+			{
+				path: 'login',
+				element: <Login />,
+			}
 		],
 	},
 ]);

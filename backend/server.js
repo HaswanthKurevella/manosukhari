@@ -8,6 +8,16 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+
+const corsOptions = {
+  origin: 'http://localhost:5173', // Replace with your frontend's URL
+  optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
+
+
+
 app.use(cors());
 app.use(bodyParser.json()); 
 
@@ -106,22 +116,24 @@ app.post('/api/feedback', async (req, res) => {
     }
   });
   
-// registration endpoint 
+// Define a User Model
 
-//app.post('/register',async (req, res) => {
-//     try {
-//         const {email, password} = req.body;
-//         const hashedPassword = await bcrypt.hash(password, 10);
+const User = mongoose.model('User', new mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+    mobile: String,
+},{
+    collection: 'userRegistration',
+    timestamps: true
+}));
 
-//         const User = new User({email, password: hashedPassword});
-//         await User.save();
 
-//         res.status(201).json({message: 'User created successfully'});
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({message: 'Something went wrong'});
-//     }
-// });
+
+
+
+
+
 
 // Login endpoint
 

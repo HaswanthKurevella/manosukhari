@@ -30,7 +30,7 @@ function NavBar() {
 						<Link to='feedback'>Feedback</Link>
 					</li>
 					<li>
-						<Link to='login'>Login</Link>
+						<Link to='userRegister'>Register/Login</Link>
 					</li>
 				</ul>
 			</nav>
