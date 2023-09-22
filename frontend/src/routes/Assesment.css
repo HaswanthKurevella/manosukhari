@@ -1,0 +1,53 @@
+/* Assessment.css */
+
+.quiz-app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .quiz-app h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .quiz-app p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .quiz-app ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .quiz-app ul li {
+    font-size: 16px;
+    margin: 5px 0;
+    cursor: pointer;
+    text-align: center; /* Align the options to the center */
+    padding: 10px 0; /* Add some vertical padding for better spacing */
+  }
+  
+  .quiz-app ul li:hover {
+    background-color: #ddd;
+  }
+  
+  .quiz-app button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .quiz-app button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -144,6 +144,30 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
+// Define a schema and model for the assessment data
+const assessmentSchema = new mongoose.Schema({
+  depressionScore: Number,
+  stressScore: Number,
+  anxiousScore: Number,
+  // Add other fields here if needed
+},{
+  collection: 'assessment',
+  timestamps: true
+});
+
+app.post('/api/save-assessment', async (req, res) => {
+  try {
+    const assessmentData = req.body;
+    const assessment = new Assessment(assessmentData);
+    await assessment.save();
+    res.json({ message: 'Assessment data saved successfully' });
+  } catch (error) {
+    console.error('Error saving assessment data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 app.listen(8000, () => {
   console.log('Express server is running on localhost:8000');
 });
