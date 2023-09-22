@@ -4,9 +4,8 @@ const app = express();
 const dbURI = "mongodb+srv://munagalavamsi37:1234@cluster0.x3hwgmg.mongodb.net/adminConsole?retryWrites=true&w=majority";
 const cors = require('cors');
 const bodyParser = require('body-parser');
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+
+
 
 
 const corsOptions = {
@@ -130,36 +129,34 @@ const User = mongoose.model('User', new mongoose.Schema({
 
 
 
+// mood api call
 
+// mood api call
+const MoodSchema = new mongoose.Schema({
+  mood: String,
+}, {
+  collection: 'mood',
+  timestamps: true
+});
 
+const MoodModel = mongoose.model('Mood', MoodSchema);
 
+app.post('/api/save-mood', async (req, res) => {
+  try {
+    const { mood } = req.body;
 
+    const newMood = new MoodModel({
+      mood,
+    });
 
-// Login endpoint
+    await newMood.save();
 
-// app.post('/login', async (req, res) => {
-//     try {
-//         const {email, password} = req.body;
-//         const user = await.User.findOne({email});
-
-//         if(!user) {
-//             return res.status(404).json({message: 'User not found'});
-//         }
-//         const passwordMatch = await bcrypt.compare(password, user.password);
-
-//         if(passwordMatch) {
-//             return res.status(200).json({message: 'Login successful'});
-//         } else {
-//             return res.status(401).json({message: 'Invalid credentials'});
-//         }
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({message: 'Something went wrong'});
-//     }
-// });
-
-
-
+    res.status(201).json({ message: 'Mood saved successfully' });
+  } catch (error) {
+    console.error('Error saving mood:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 app.listen(5000, () => {
   console.log('Express server is running on localhost:5000');

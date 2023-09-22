@@ -59,7 +59,7 @@ const router = createBrowserRouter([
 				path:'moodJournal',
 				element:<MoodJournal/>,
 			},
-
+			{
 				path: 'login',
 				element: <Login />,
 			}
