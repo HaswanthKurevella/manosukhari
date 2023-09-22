@@ -13,7 +13,7 @@ function MoodJournal() {
     // You can perform any action with the selected mood here, e.g., send it to a server
     console.log(`User's selected mood: ${selectedMood}`);
   
-    axios.post('http://localhost:5000/api/save-mood', { mood: selectedMood })
+    axios.post('http://localhost:8000/api/save-mood', { mood: selectedMood })
       .then((response) => {
         console.log(response.data);
         toast.success("Mood Submitted: " + selectedMood);

@@ -23,7 +23,8 @@ const TherapistForm = () => {
             <tr>
               <th>Name</th>
               <th>Qualification</th> {/* Corrected field name */}
-              <th>Email</th> {/* Corrected field name */}
+              <th>Email</th> 
+    
             </tr>
           </thead>
           <tbody>

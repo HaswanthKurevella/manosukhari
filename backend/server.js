@@ -36,6 +36,7 @@ const therapistSchema = new mongoose.Schema({
     email:String,
     mobile:String,
     qualification:String,
+
 });
 
 const TherapistModel = mongoose.model('therapists', therapistSchema);
@@ -117,30 +118,66 @@ app.post('/api/feedback', async (req, res) => {
       });
     }
   });
+
+
+  const MoodSchema = new mongoose.Schema({
+    mood: String,
+  }, {
+    collection: 'mood',
+    timestamps: true
+  });
+  
+  const MoodModel = mongoose.model('Mood', MoodSchema);
+  
+  app.post('/api/save-mood', async (req, res) => {
+    try {
+      const { mood } = req.body;
+  
+      const newMood = new MoodModel({
+        mood,
+      });
+  
+      await newMood.save();
+  
+      res.status(201).json({ message: 'Mood saved successfully' });
+    } catch (error) {
+      console.error('Error saving mood:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
   
 // Define a User Model
 
-const User = mongoose.model('User', new mongoose.Schema({
-    username: String,
-    email: String,
-    password: String,
-    mobile: String,
+const userSchema = new mongoose.Schema({
+  username: String,
+  mobileNumber: String,
+  email: String,
+  password: String,
 },{
-    collection: 'userRegistration',
-    timestamps: true
-}));
+  collection: 'userRegister',
+  timestamps: true
+});
 
+const User = mongoose.model('User', userSchema);
 
-app.post('/api/register', async (req, res) => {
+app.use(bodyParser.json());
+
+app.post('/api/userRegister', async (req, res) => {
+  const { username, mobileNumber, email, password } = req.body;
+
+  const newUser = new User({
+    username,
+    mobileNumber,
+    email,
+    password,
+  });
+
   try {
-    const { username, mobileNumber, email, password, qualification, photo } = req.body;
-
-    // Create a new Therapist if needed and save it to the database
-
-    res.status(201).json({ message: 'Therapist registered successfully' });
+    await newUser.save();
+    res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-    console.error('Error registering therapist:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error registering user:', error);
+    res.status(500).json({ error: 'Registration failed' });
   }
 });
 
@@ -155,6 +192,9 @@ const assessmentSchema = new mongoose.Schema({
   timestamps: true
 });
 
+
+const Assessment = mongoose.model('Assessment', assessmentSchema);
+
 app.post('/api/save-assessment', async (req, res) => {
   try {
     const assessmentData = req.body;
@@ -164,6 +204,33 @@ app.post('/api/save-assessment', async (req, res) => {
   } catch (error) {
     console.error('Error saving assessment data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+// login api for the user
+
+app.post('/api/userLogin', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // You should implement password hashing and validation here
+    // Compare the hashed password stored in the database with the provided password
+
+    if (user.password !== password) {
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
+
+    res.status(200).json({ message: 'Login successful' });
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ error: 'Login failed' });
   }
 });
 
