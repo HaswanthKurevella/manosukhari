@@ -10,7 +10,6 @@ import Assesment from './routes/Assesment.jsx';
 import Feedback from './routes/FeedBack.jsx';
 import FAQ from './routes/FAQ.jsx';
 import About from './routes/About.jsx';
-import Assesment from './routes/Assesment.jsx';
 import Articles, { loader as articlesLoader } from './routes/Articles.jsx';
 import TherapistDirectory from './routes/TherapistDirectory.jsx';
 
