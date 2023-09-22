@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { Link, Navigate } from "react-router-dom";// Import useHistory
+import { Navigate } from "react-router-dom"; // Import Navigate
 import axios from "axios";
 
 const Login = () => {
@@ -10,8 +10,7 @@ const Login = () => {
 
   const [loginError, setLoginError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  // Initialize the history object
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication status
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +31,7 @@ const Login = () => {
       if (response.status === 200) {
         // Handle successful login
         console.log("Login successful");
-        // Navigate("/main");
+        setIsAuthenticated(true); // Set authentication status to true
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -45,6 +44,11 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+
+  // If isAuthenticated is true, navigate to the home page
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div>
