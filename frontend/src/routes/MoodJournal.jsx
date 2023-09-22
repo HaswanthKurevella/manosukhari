@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
 
 function MoodJournal() {
   const [selectedMood, setSelectedMood] = useState(''); // State to store the selected mood
@@ -11,8 +12,16 @@ function MoodJournal() {
   const handleSubmit = () => {
     // You can perform any action with the selected mood here, e.g., send it to a server
     console.log(`User's selected mood: ${selectedMood}`);
-    toast.success("Mood Submitted: " + selectedMood)
-    // Add your logic for handling the mood selection here
+  
+    axios.post('http://localhost:5000/api/save-mood', { mood: selectedMood })
+      .then((response) => {
+        console.log(response.data);
+        toast.success("Mood Submitted: " + selectedMood);
+      })
+      .catch((error) => {
+        console.error('Error submitting mood:', error);
+        toast.error("Error submitting mood");
+      });
   };
 
   return (

@@ -4,11 +4,7 @@ const app = express();
 const dbURI = "mongodb+srv://munagalavamsi37:1234@cluster0.x3hwgmg.mongodb.net/adminConsole?retryWrites=true&w=majority";
 const cors = require('cors');
 const bodyParser = require('body-parser');
-// const bcrypt = require('bcrypt'); // You need to require bcrypt for password hashing
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
 
 // Uncomment and use corsOptions if you want to specify origins
 // const corsOptions = {
@@ -69,6 +65,7 @@ app.get('/api/therapists/:id', (req, res) => {
         confirmation: 'error',
         message: 'Internal server error',
       });
+
     });
 });
 
@@ -122,6 +119,52 @@ const User = mongoose.model('User', new mongoose.Schema({
 //     res.status(500).json({ message: 'Something went wrong' });
 //   }
 // });
+=======
+    }
+  });
+  
+// Define a User Model
+
+const User = mongoose.model('User', new mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+    mobile: String,
+},{
+    collection: 'userRegistration',
+    timestamps: true
+}));
+
+
+
+// mood api call
+
+// mood api call
+const MoodSchema = new mongoose.Schema({
+  mood: String,
+}, {
+  collection: 'mood',
+  timestamps: true
+});
+
+const MoodModel = mongoose.model('Mood', MoodSchema);
+
+app.post('/api/save-mood', async (req, res) => {
+  try {
+    const { mood } = req.body;
+
+    const newMood = new MoodModel({
+      mood,
+    });
+
+    await newMood.save();
+
+    res.status(201).json({ message: 'Mood saved successfully' });
+  } catch (error) {
+    console.error('Error saving mood:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 app.listen(5000, () => {
   console.log('Express server is running on localhost:5000');
