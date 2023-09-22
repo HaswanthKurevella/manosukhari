@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './styles/Feedback.css';
 import axios from 'axios'; // Import axios
-// import GaugeChart from "react-gauge-chart";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const Feedback = () => {
   const [title, setTitle] = useState('');
@@ -33,6 +34,8 @@ const Feedback = () => {
         console.log('Feedback saved successfully');
         setTitle('');
         setDescription('');
+        toast.success("Feedback Submitted");
+
       } else {
         console.error('Error saving feedback');
       }
@@ -66,6 +69,7 @@ const Feedback = () => {
         </div>
         <div>
           <button type="submit">Submit Feedback</button>
+          <Toaster />
         </div>
       </form>
     </div>

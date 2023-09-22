@@ -127,6 +127,7 @@ function Assessment() {
       return;
     }
 
+
     const selectedScore = questions[currentQuestion].scores[selectedOptionIndex];
 
     if (depressionQuestions.includes(currentQuestion)) {
