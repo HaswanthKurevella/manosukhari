@@ -10,6 +10,8 @@ export async function loader() {
 	yesterday.setDate(currentDate.getDate() - 1);
 	const data = await fetch(
 		`https://newsapi.org/v2/everything?q=mental%20health&from=${yesterday}&apiKey=${API_KEY}`
+
+
 	);
 	return data;
 }
