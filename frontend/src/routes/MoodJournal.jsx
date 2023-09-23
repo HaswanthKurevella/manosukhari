@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
+// import MoodCounts from './MoodCounts';
 
 function MoodJournal() {
   const [selectedMood, setSelectedMood] = useState(''); // State to store the selected mood
@@ -43,7 +44,9 @@ function MoodJournal() {
       </select>
       <button onClick={handleSubmit}>Submit</button>
       <Toaster />
+      {/* <MoodCounts /> */}
     </div>
+    
   );
 }
 

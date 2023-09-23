@@ -16,6 +16,11 @@ a {
 li {
 	list-style: none;
 }
+li:hover {
+    border-color: #FF5733;
+	font-weight: bold;
+}
+
 
 .logo-text {
 	font-weight: bold;
